@@ -1,0 +1,46 @@
+ALGORITHM search_array
+VAR
+   Set1: ARRAY_OF INTEGER[8];
+   Set2 : ARRAY_OF INTEGER[5];
+    arr : ARRAY_OF INTEGER[14];
+   i,j,elt, sumdis, sumcom : INTEGER;
+BEGIN
+//intialize Set1
+   FOR i FROM 0 TO 4 DO
+       Read(elt);
+      FOR j FROM 0 TO i DO
+      IF (elt<>Set1[j]) THEN
+          Set1[i]:= elt;
+             ELSE
+      Read(elt);
+       END_IF
+    END_FOR
+   END_FOR
+   //intialize Set2
+    FOR i FROM 0 TO 7 DO
+       Read(elt);
+      FOR j FROM 0 TO i DO
+      IF (elt<>Set2[j]) THEN
+          Set2[i]:= elt;
+             ELSE
+      Read(elt);
+       END_IF
+    END_FOR
+   END_FOR
+   arr=concat(Set1,Set2)
+   i:=0;
+   j := arr.length-1;
+   WHILE (i < arr.length) DO
+    WHILE (j >=i+1) DO
+       IF (arr[i] ==arr[j]) THEN
+           sumcom:=sumcom+2*arr[i];
+             ELSE
+      sumdis:=sumdis+arr[i]
+       END_IF
+       j := j-1; 
+   END_WHILE
+   i:=i+1
+   END_WHILE
+Write("the sum of all distinct elements from the sets is ", sumdis);
+Write("the sum of all commun elements from the sets is ", sumdcom);
+END

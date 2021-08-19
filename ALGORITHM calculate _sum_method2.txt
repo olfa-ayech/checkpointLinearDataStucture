@@ -1,0 +1,58 @@
+ALGORITHM calculate_sum_method2
+VAR
+   Set1: ARRAY_OF INTEGER[8];
+   Set2 : ARRAY_OF INTEGER[5];
+    arr : ARRAY_OF INTEGER[14];
+   i,j,elt, sumdis, sumcom : INTEGER;
+BEGIN
+//////////////////////intialize Set1////////////////////////////////////////////
+   FOR i FROM 0 TO 4 DO
+       Read(elt);
+      FOR j FROM 0 TO i DO
+      IF (elt<>Set1[j]) THEN
+          Set1[i]:= elt;
+             ELSE
+      Read(elt);
+       END_IF
+    END_FOR
+   END_FOR
+   //////////////////intialize Set2///////////////////////////////////////////////////////
+    FOR i FROM 0 TO 7 DO
+       Read(elt);
+      FOR j FROM 0 TO i DO
+      IF (elt<>Set2[j]) THEN
+          Set2[i]:= elt;
+             ELSE
+      Read(elt);
+       END_IF
+    END_FOR
+   END_FOR
+   arr=Set2.concat(Set1)
+   ///////////////////////////////////////////////////////////////////////////////////////////////
+   htab : HASH_TABLE<INTEGER,INTEGER>;
+  FOR i FROM 0 TO Set1.length DO
+    htab.insert(Set1[i],1);
+    END_FOR
+    /////////////////////////////////////////////////////////////////////
+ FOR i FROM 0 TO Set2.length DO
+ IF (htab.get(Set2[i]) = 1) THEN
+         htab.insert(Set2[i],2);
+             ELSE
+      htab.insert(Set2[i],1);
+       END_IF
+       END_FOR
+       ////////////////////////////////////////////////////////////////////
+         j := 0;
+         sumcom:=0
+         sumdis:=0
+   WHILE (j < arr.length) DO
+       IF (htab.get(arr[i]) = 1) THEN
+           sumdis=sumdis+arr[i];
+           ELSE
+           sumcom=sumcom+2*arr[i]
+       END_IF
+       j := j+1; 
+   END_WHILE
+Write("the sum of all distinct elements from the sets is ", sumdis);
+Write("the sum of all commun elements from the sets is ", sumdcom);
+END
